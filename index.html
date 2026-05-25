@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rebecca S. Briones | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:#3b2a1a;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8f4ef,
+      #f1e6db,
+      #f7f2ec,
+      #efe2d4
+    );
+
+  background-size:400% 400%;
+
+  animation:bgShift 18s ease infinite;
+}
+
+@keyframes bgShift{
+
+  0%{
+    background-position:0% 50%;
+  }
+
+  50%{
+    background-position:100% 50%;
+  }
+
+  100%{
+    background-position:0% 50%;
+  }
+
+}
+
+/* INTRO SCREEN */
+#loadingScreen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+
+  background:#f4ece4;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+
+  z-index:1000;
+
+  transition:opacity 1s ease;
+}
+
+.intro-sub{
+  margin-top:20px;
+
+  font-size:0.95rem;
+  font-weight:500;
+  letter-spacing:2px;
+  text-transform:uppercase;
+
+  color:#9b7b60;
+
+  opacity:0;
+
+  animation:fadeSub 1s forwards;
+  animation-delay:3s;
+}
+
+@keyframes fadeSub{
+  to{
+    opacity:1;
+  }
+}
+
+/* MINIMAL INTRO TEXT */
+.intro-word{
+  font-family:'Inter',sans-serif;
+
+  font-size:clamp(2.2rem,5vw,4rem);
+  font-weight:600;
+  letter-spacing:-1px;
+
+  color:#6b4a32;
+
+  opacity:0;
+  transform:translateY(20px);
+
+  animation:wordReveal 0.8s forwards;
+}
+
+/* DELAYS */
+.intro-word:nth-child(1){
+  animation-delay:0.3s;
+}
+
+.intro-word:nth-child(2){
+  animation-delay:1.2s;
+}
+
+.intro-word:nth-child(3){
+  animation-delay:2.1s;
+}
+
+@keyframes wordReveal{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* FLOATING ORBS */
+.bg-orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(80px);
+  z-index:-2;
+  opacity:0.35;
+  animation:floatOrb 18s ease-in-out infinite;
+}
+
+/* ORB 1 */
+.orb1{
+  width:320px;
+  height:320px;
+
+  background:#c49a6c;
+
+  top:10%;
+  left:5%;
+}
+
+/* ORB 2 */
+.orb2{
+  width:260px;
+  height:260px;
+
+  background:#d8b08c;
+
+  bottom:10%;
+  right:5%;
+
+  animation-delay:4s;
+}
+
+/* ORB 3 */
+.orb3{
+  width:220px;
+  height:220px;
+
+  background:#8b5e3c;
+
+  top:50%;
+  left:50%;
+
+  animation-delay:8s;
+}
+
+@keyframes floatOrb{
+
+  0%{
+    transform:translate(0,0) scale(1);
+  }
+
+  25%{
+    transform:translate(30px,-40px) scale(1.05);
+  }
+
+  50%{
+    transform:translate(-20px,20px) scale(0.95);
+  }
+
+  75%{
+    transform:translate(40px,30px) scale(1.02);
+  }
+
+  100%{
+    transform:translate(0,0) scale(1);
+  }
+
+}
+
+.resume-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:20px;
+}
+
+.resume-btn{
+  padding:14px 28px;
+  border:2px solid #8b5e3c;
+  background:transparent;
+  color:#8b5e3c;
+
+  font-family:'Orbitron',sans-serif;
+  font-weight:600;
+  letter-spacing:1px;
+
+  text-decoration:none;
+  border-radius:8px;
+
+  transition:0.4s ease;
+
+  text-align:center;
+}
+
+.resume-btn:hover{
+  background:#8b5e3c;
+  color:white;
+  box-shadow:0 0 20px #8b5e3c;
+  transform:translateY(-3px);
+}
+
+/* HEADER */
+header{
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+
+  gap:18px;
+
+  padding:0 20px;
+}
+
+header.hidden{
+  display:none;
+}
+
+header h1{
+  margin-bottom:5px;
+}
+
+header p{
+  margin-bottom:15px;
+}
+
+.btn{
+  display:inline-block;
+}
+
+header h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(2.8rem,7vw,4rem);
+
+  background:linear-gradient(
+    270deg,
+    #5c4033,
+    #b08968,
+    #5c4033
+  );
+
+  background-size:400% 400%;
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  animation:gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+header p{
+  font-size:1.2rem;
+  color:#a0704d;
+}
+
+.nav a.active{
+  color:#c49a6c;
+  border-bottom:1px solid rgba(196,154,108,0.6);
+  padding-bottom:2px;
+}
+
+/* BUTTON (VISIT) */
+/* CLEAN PROFESSIONAL BUTTON */
+.btn{
+  padding:14px 32px;
+  border-radius:12px;
+
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(196,154,108,0.4);
+
+  color:#8b5e3c;
+
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:0.5px;
+
+  cursor:pointer;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:all 0.3s ease;
+
+  font-family:'Inter',sans-serif;
+
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* HOVER */
+.btn:hover{
+  transform:translateY(-3px);
+
+  background:rgba(196,154,108,0.12);
+  border:1px solid rgba(196,154,108,0.7);
+
+  box-shadow:
+    0 0 20px rgba(196,154,108,0.25),
+    0 10px 30px rgba(0,0,0,0.08);
+
+  color:#8b5e3c;
+}
+
+/* CLICK EFFECT */
+.btn:active{
+  transform:scale(0.97);
+}
+
+/* TEXT INSIDE (keeps it upright) */
+.btn span{
+  transform:rotate(-45deg);
+  display:inline-block;
+  font-family:'Orbitron',sans-serif;
+  font-size:10px;
+  letter-spacing:1px;
+}
+
+/* SECTIONS */
+section{
+  padding:70px 40px;
+  max-width:900px;
+  margin:60px auto;
+
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(196,154,108,0.2);
+
+  border-radius:18px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.05);
+
+  opacity:0;
+  transform:translateY(30px);
+
+  transition:0.8s ease;
+  display:none;
+}
+
+section.visible{
+  opacity:1;
+  transform:translateY(0);
+  display:block;
+}
+
+section:hover{
+  border-color:rgba(196,154,108,0.35);
+  box-shadow:0 0 40px rgba(196,154,108,0.08);
+}
+
+section{
+  transition:0.8s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+h2{
+  margin-bottom:25px;
+  color:#8b5e3c;
+
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  letter-spacing:2px;
+  font-size:1.1rem;
+
+  text-transform:uppercase;
+}
+
+/* DIVIDER */
+.med-divider{
+  width:100%;
+  height:40px;
+  position:relative;
+  overflow:hidden;
+  margin:20px 0;
+}
+
+.med-divider::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:0;
+  width:100%;
+  height:2px;
+  background:#c49a6c;
+}
+
+.med-divider::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+
+  background:inherit;
+
+  padding:0 15px;
+
+  color:#8b5e3c;
+  font-size:18px;
+}
+
+/* ABOUT */
+.about-container{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.about-image img{
+  width:250px;
+  height:250px;
+  object-fit:cover;
+  border-radius:20px;
+  border:4px solid #8b5e3c;
+  box-shadow:0 0 25px rgba(139,94,60,0.4);
+  transition:0.4s;
+}
+
+.about-image img:hover{
+  transform:scale(1.03);
+  box-shadow:0 0 40px #8b5e3c;
+}
+
+.about-text{
+  flex:1;
+  min-width:250px;
+  line-height:1.7;
+}
+
+/* CARDS */
+.card{
+  margin-bottom:20px;
+  padding:24px;
+
+  background:rgba(255,255,255,0.08);
+
+  border:1px solid rgba(92,64,51,0.12);
+
+  border-radius:18px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:all 0.35s ease;
+
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.04);
+}
+
+.card:hover{
+  transform:translateY(-6px);
+
+  border-color:rgba(176,137,104,0.35);
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,0.08);
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border:1px solid rgba(196,154,108,0.4);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.08),
+    0 0 20px rgba(196,154,108,0.15);
+}
+
+.card h3{
+  margin-bottom:5px;
+  color:#8b5e3c;
+}
+
+.card span{
+  font-size:0.9rem;
+  color:#8a6a52;
+}
+
+ul{
+  list-style:none;
+  margin-top:15px;
+}
+
+li{
+  margin-bottom:12px;
+  line-height:1.6;
+}
+
+li::before{
+  content:"▸ ";
+  color:#8b5e3c;
+  font-weight:bold;
+}
+
+/* SKILLS */
+.skill{
+  margin-bottom:20px;
+}
+
+.skill-bar{
+  width:100%;
+  height:12px;
+  background:#e8d7c7;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.skill-fill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#c49a6c,#8b5e3c);
+  border-radius:20px;
+  transition:2s;
+}
+
+/* SOCIAL */
+.social-links{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.social-btn{
+  padding:12px 24px;
+  background:transparent;
+  border:2px solid #8b5e3c;
+  color:#8b5e3c;
+  font-weight:600;
+  border-radius:8px;
+  transition:0.4s;
+  text-decoration:none;
+  font-family:'Orbitron',sans-serif;
+}
+
+.social-btn:hover{
+  background:#8b5e3c;
+  color:white;
+  box-shadow:0 0 20px #8b5e3c;
+}
+
+/* CURSOR */
+.trail{
+  position:fixed;
+  width:10px;
+  height:10px;
+  background:#8b5e3c;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0.5;
+  transform:translate(-50%,-50%);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  header h1{
+    font-size:2rem;
+  }
+
+  section{
+  padding:50px 22px;
+}
+
+  .about-container{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .about-image img{
+    width:180px;
+    height:180px;
+  }
+
+}
+
+/* HERO ANIMATION */
+header h1,
+header p,
+.btn{
+  animation:fadeInUp 0.8s ease forwards;
+  opacity:0;
+  transform:translateY(10px);
+}
+
+header h1{ animation-delay:0.2s; }
+header p{ animation-delay:0.4s; }
+.btn{ animation-delay:0.6s; }
+
+@keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+    filter:blur(5px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="loadingScreen">
+  <span class="intro-word">Customer</span>
+  <span class="intro-word">Support</span>
+  <span class="intro-word">Expert</span>
+  <p class="intro-sub">
+  Customer Support Specialist • BPO & Hospitality Experience • Client-Focused Service
+</p>
+</div>
+
+<canvas id="particleCanvas"></canvas>
+
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
+
+<header id="mainHeader">
+
+
+  <h1>Rebecca S. Briones</h1>
+  <p>Customer Support Specialist</p>
+
+<button class="btn" id="showContent">
+  View Portfolio
+</button>
+
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+<h2>About Me</h2>
+<div class="med-divider"></div>
+
+<div class="about-container">
+  <div class="about-image">
+    <img src="rebecca.jpg" alt="Rebecca Briones">
+  </div>
+
+  <div class="about-text">
+    <h3>Rebecca Sobiga Briones</h3>
+    <p>
+      A hardworking and adaptable professional with experience in customer service,
+      technical support, food service, and hospitality.
+    </p>
+  </div>
+</div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+<h2>Experience</h2>
+<div class="med-divider"></div>
+
+<div class="card">
+  <h3>Customer Support Representative — Teleperformance</h3>
+  <span>6 Months</span>
+  <ul>
+    <li>Handled customer inquiries and provided technical support.</li>
+    <li>Maintained professional communication with clients.</li>
+    <li>Resolved concerns efficiently while ensuring customer satisfaction.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Customer Support Representative — Transcom</h3>
+  <span>3 Months</span>
+  <ul>
+    <li>Assisted customers with account and service concerns.</li>
+    <li>Delivered clear and accurate information to clients.</li>
+    <li>Worked in a fast-paced BPO environment.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Customer Service Associate — iQor Talisay</h3>
+  <span>6 Months</span>
+  <ul>
+    <li>Provided customer assistance and issue resolution.</li>
+    <li>Managed multiple customer interactions daily.</li>
+    <li>Maintained quality service and communication standards.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Waitress — Razel’s Cafe</h3>
+  <span>5 Months</span>
+  <ul>
+    <li>Served customers while ensuring a positive dining experience.</li>
+    <li>Handled orders, food service, and customer requests.</li>
+    <li>Maintained cleanliness and professionalism in the workplace.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Service Crew — Sunny Bakeshop</h3>
+  <span>2 Months</span>
+  <ul>
+    <li>Assisted customers with bakery orders and inquiries.</li>
+    <li>Maintained product display and cleanliness.</li>
+    <li>Provided friendly and efficient customer service.</li>
+  </ul>
+</div>
+
+<section id="resume">
+<h2>Resume</h2>
+<div class="med-divider"></div>
+
+<div class="resume-container">
+  <a href="Rebecca-Resume.pdf" download class="resume-btn">
+    Download Resume (PDF)
+  </a>
+</div>
+</section>
+
+</section>
+<section id="skills">
+<h2>Skills</h2>
+<div class="med-divider"></div>
+
+<div class="skill">
+  <p>Customer Support</p>
+  <div class="skill-bar">
+    <div class="skill-fill" data-width="95%"></div>
+  </div>
+</div>
+
+<div class="skill">
+  <p>Technical Support</p>
+  <div class="skill-bar">
+    <div class="skill-fill" data-width="85%"></div>
+  </div>
+</div>
+
+<div class="skill">
+  <p>Communication</p>
+  <div class="skill-bar">
+    <div class="skill-fill" data-width="90%"></div>
+  </div>
+</div>
+
+<div class="skill">
+  <p>Hospitality Service</p>
+  <div class="skill-bar">
+    <div class="skill-fill" data-width="88%"></div>
+  </div>
+</div>
+
+</section>
+
+<!-- SOCIAL -->
+<section id="socials">
+<h2>Connect with Me</h2>
+<div class="med-divider"></div>
+
+<div class="social-links">
+  <a href="#" class="social-btn">Facebook</a>
+  <a href="#" class="social-btn">Instagram</a>
+</div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+<script>
+// intro loading screen
+window.addEventListener('load', ()=>{
+
+  const loadingScreen =
+    document.getElementById('loadingScreen');
+
+  setTimeout(()=>{
+    loadingScreen.style.opacity='0';
+
+    setTimeout(()=>{
+      loadingScreen.style.display='none';
+    },1000);
+
+  },6000);
+
+});
+
+// show sections
+const button = document.getElementById('showContent');
+const sections = document.querySelectorAll('section');
+const header = document.getElementById('mainHeader');
+
+button.addEventListener('click', ()=>{
+  header.classList.add('hidden');
+
+  sections.forEach((sec,i)=>{
+    setTimeout(()=> sec.classList.add('visible'), i*200);
+  });
+});
+
+// skills animation
+function animateSkills(){
+  document.querySelectorAll('.skill-fill').forEach(bar=>{
+    bar.style.width = bar.dataset.width;
+  });
+}
+
+window.addEventListener('scroll', ()=>{
+  const skillsSection = document.getElementById('skills');
+  const position = skillsSection.getBoundingClientRect().top;
+
+  if(position < window.innerHeight){
+    animateSkills();
+  }
+});
+
+</script>
+
+</body>
+</html>
