@@ -293,7 +293,8 @@ header h1{
 }
 
 header p{
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-size:1.2rem;
+  color:#a0704d;
 }
 
 .nav a.active{
@@ -359,39 +360,32 @@ header p{
 
 /* SECTIONS */
 section{
-  width: min(900px, 92vw);
-  margin: 60px auto;
-  padding: clamp(40px, 6vw, 70px) clamp(20px, 4vw, 40px);
+  padding:70px 40px;
+  max-width:900px;
+  margin:60px auto;
 
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(196,154,108,0.2);
+
   border-radius:18px;
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
-  box-shadow:0 10px 40px rgba(0,0,0,0.05);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.05);
 
   opacity:0;
   transform:translateY(30px);
 
-  transition:0.8s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-
-  /* ❗ REMOVE display:none */
-  visibility: hidden;
-  pointer-events: none;
-  height: 0;
-  overflow: hidden;
+  transition:0.8s ease;
+  display:none;
 }
 
 section.visible{
   opacity:1;
   transform:translateY(0);
-
-  visibility: visible;
-  pointer-events: auto;
-  height: auto;
-  overflow: visible;
+  display:block;
 }
 
 section:hover{
@@ -413,13 +407,6 @@ h2{
   font-size:1.1rem;
 
   text-transform:uppercase;
-}
-
-  .btn, .social-btn, .resume-btn{
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* DIVIDER */
@@ -464,26 +451,14 @@ h2{
   flex-wrap:wrap;
 }
 
-.about-image{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
 .about-image img{
-  width:220px;
-  height:220px;
+  width:250px;
+  height:250px;
   object-fit:cover;
-  object-position:center;
-  border-radius:50%;
-  border:3px solid rgba(139,94,60,0.6);
-  box-shadow:0 10px 30px rgba(0,0,0,0.15);
-  transition:0.4s ease;
-}
-
-.about-image img:hover{
-  transform:scale(1.05);
-  box-shadow:0 15px 45px rgba(139,94,60,0.35);
+  border-radius:20px;
+  border:4px solid #8b5e3c;
+  box-shadow:0 0 25px rgba(139,94,60,0.4);
+  transition:0.4s;
 }
 
 .about-image img:hover{
@@ -621,37 +596,24 @@ li::before{
 }
 
 /* MOBILE */
-@media (max-width: 768px){
-
-  header{
-    padding: 0 16px;
-  }
+@media(max-width:768px){
 
   header h1{
-    font-size: 2rem;
+    font-size:2rem;
   }
 
   section{
-    margin: 40px auto;
-  }
+  padding:50px 22px;
+}
 
   .about-container{
-    flex-direction: column;
-    text-align: center;
+    flex-direction:column;
+    text-align:center;
   }
 
   .about-image img{
-    width: 180px;
-    height: 180px;
-  }
-
-  .card{
-    padding: 18px;
-  }
-
-  .social-links{
-    flex-direction: column;
-    align-items: center;
+    width:180px;
+    height:180px;
   }
 
 }
