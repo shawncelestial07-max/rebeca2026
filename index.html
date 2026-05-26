@@ -877,6 +877,8 @@ button.addEventListener('click', ()=>{
 
   });
 
+  setTimeout(animateSkills, 1000);
+
 });
 
 // skills animation
@@ -886,14 +888,6 @@ function animateSkills(){
   });
 }
 
-window.addEventListener('scroll', ()=>{
-  const skillsSection = document.getElementById('skills');
-  const position = skillsSection.getBoundingClientRect().top;
-
-  if(position < window.innerHeight){
-    animateSkills();
-  }
-});
 </script>
 
 </body>
