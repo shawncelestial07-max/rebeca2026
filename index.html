@@ -63,6 +63,33 @@ body{
 
 }
 
+.email-btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:12px 18px;
+
+  border:1px solid rgba(139,94,60,0.6);
+  border-radius:8px;
+
+  color:#8b5e3c;
+  text-decoration:none;
+
+  font-size:13px;
+  font-family:'Inter',sans-serif;
+
+  background:rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+
+  transition:0.3s ease;
+}
+
+.email-btn:hover{
+  background:#8b5e3c;
+  color:white;
+  box-shadow:0 0 20px rgba(139,94,60,0.4);
+  transform:translateY(-3px);
+}
+
 /* INTRO SCREEN */
 #loadingScreen{
   position:fixed;
@@ -221,7 +248,9 @@ body{
 }
 
 .resume-btn{
-  padding:14px 28px;
+  padding:10px 20px;   /* smaller button */
+  font-size:12px;      /* smaller text */
+
   border:2px solid #8b5e3c;
   background:transparent;
   color:#8b5e3c;
@@ -234,7 +263,6 @@ body{
   border-radius:8px;
 
   transition:0.4s ease;
-
   text-align:center;
 }
 
@@ -546,13 +574,11 @@ h2{
 }
 
 .social-btn{
-
-  padding:14px 28px;
+  padding:10px 18px;   /* smaller button */
+  font-size:12px;      /* smaller text */
 
   border:2px solid #8b5e3c;
-
   background:transparent;
-
   color:#8b5e3c;
 
   font-family:'Orbitron',sans-serif;
@@ -560,13 +586,10 @@ h2{
   letter-spacing:1px;
 
   text-decoration:none;
-
   border-radius:8px;
 
   transition:0.4s ease;
-
   text-align:center;
-
 }
 
 .social-btn:hover{
@@ -611,6 +634,11 @@ h2{
     height:180px;
     animation:floatImage 6s ease-in-out infinite;
   }
+
+  .resume-btn{
+  padding:8px 16px;
+  font-size:11px;
+}
 
   @keyframes floatImage{
 
@@ -852,6 +880,11 @@ h2{
    target="_blank">
    Instagram
 </a>
+<a href="mailto:rebeccabriones13@gmail.com"
+   class="social-btn">
+   Email Me
+</a>
+
 </div>
 </section>
 
