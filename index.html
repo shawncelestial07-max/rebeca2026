@@ -287,15 +287,15 @@ header p{
 
 /* BUTTON */
 .btn{
-  padding:14px 32px;
-  border-radius:12px;
+  padding:10px 22px;
+  border-radius:10px;
 
   background:rgba(255,255,255,0.08);
   border:1px solid rgba(196,154,108,0.4);
 
   color:#8b5e3c;
 
-  font-size:15px;
+  font-size:14px;
   font-weight:600;
   letter-spacing:0.5px;
 
@@ -338,6 +338,7 @@ header p{
 
 /* SECTIONS */
 section{
+
   padding:70px 40px;
   max-width:900px;
   margin:60px auto;
@@ -350,23 +351,20 @@ section{
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
 
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.05);
+  box-shadow:0 10px 40px rgba(0,0,0,0.05);
 
   opacity:0;
   transform:translateY(30px);
 
-  transition:
-  opacity 0.8s ease,
-  transform 0.8s ease;
+  transition:0.8s ease;
 
-  display:none;
+  display:none; /* IMPORTANT */
+
 }
 
 section.visible{
   opacity:1;
   transform:translateY(0);
-  display:block;
 }
 
 section:hover{
@@ -846,11 +844,16 @@ button.addEventListener('click', ()=>{
 
     sec.style.display = 'block';
 
-    setTimeout(()=>{
+    // FORCE MOBILE RENDER (VERY IMPORTANT)
+    requestAnimationFrame(()=>{
 
-      sec.classList.add('visible');
+      setTimeout(()=>{
 
-    },50 + (i * 200));
+        sec.classList.add('visible');
+
+      }, i * 200);
+
+    });
 
   });
 
