@@ -347,8 +347,8 @@ section{
 
   border-radius:18px;
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
 
   box-shadow:
     0 10px 40px rgba(0,0,0,0.05);
@@ -356,7 +356,10 @@ section{
   opacity:0;
   transform:translateY(30px);
 
-  transition:0.8s ease;
+  transition:
+  opacity 0.8s ease,
+  transform 0.8s ease;
+
   display:none;
 }
 
@@ -836,11 +839,21 @@ const sections = document.querySelectorAll('section');
 const header = document.getElementById('mainHeader');
 
 button.addEventListener('click', ()=>{
+
   header.classList.add('hidden');
 
   sections.forEach((sec,i)=>{
-    setTimeout(()=> sec.classList.add('visible'), i*200);
+
+    sec.style.display = 'block';
+
+    setTimeout(()=>{
+
+      sec.classList.add('visible');
+
+    },50 + (i * 200));
+
   });
+
 });
 
 // skills animation
