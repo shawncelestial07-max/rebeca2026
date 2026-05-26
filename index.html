@@ -15,7 +15,12 @@
 }
 
 body.portfolio-open{
-  overflow:auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+html, body{
+  overflow-x: hidden;
 }
 
 /* GLOBAL */
@@ -424,13 +429,15 @@ section.active:hover{
 }
 
 section.zoomed{
-  transform: scale(1.05);
+  transform: scale(1.03);
   z-index: 10;
   position: relative;
 
-  box-shadow:
-    0 20px 60px rgba(0,0,0,0.2),
-    0 0 40px rgba(196,154,108,0.2);
+  transform-origin: center;
+}
+
+.bg-orb{
+  pointer-events: none;
 }
 
 h2{
@@ -654,6 +661,16 @@ h2{
     transform:translateY(0);
   }
 
+}
+
+.btn{
+  padding:6px 14px;
+  font-size:11px;
+  max-width:180px;
+}
+
+header .btn{
+  margin-top:10px;
 }
 
 #portfolioContainer{
