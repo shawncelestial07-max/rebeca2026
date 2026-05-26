@@ -463,16 +463,28 @@ h2{
 
   backdrop-filter: blur(10px);
 
-  transition:all 0.35s ease;
+  transition:
+  transform 0.35s ease,
+  box-shadow 0.35s ease,
+  border-color 0.35s ease;
 
   box-shadow:
     0 4px 20px rgba(0,0,0,0.04);
 }
 
 .card:hover{
-  transform:translateY(-6px);
-  border-color:rgba(176,137,104,0.35);
-  box-shadow:0 12px 35px rgba(0,0,0,0.08);
+
+  transform:
+    translateY(-8px)
+    scale(1.015);
+
+  border-color:
+    rgba(196,154,108,0.45);
+
+  box-shadow:
+    0 0 25px rgba(196,154,108,0.12),
+    0 15px 45px rgba(0,0,0,0.10);
+
 }
 
 /* SKILLS */
@@ -504,11 +516,39 @@ h2{
 }
 
 .social-btn{
-  padding:12px 24px;
+
+  padding:14px 28px;
+
   border:2px solid #8b5e3c;
-  border-radius:8px;
-  text-decoration:none;
+
+  background:transparent;
+
   color:#8b5e3c;
+
+  font-family:'Orbitron',sans-serif;
+  font-weight:600;
+  letter-spacing:1px;
+
+  text-decoration:none;
+
+  border-radius:8px;
+
+  transition:0.4s ease;
+
+  text-align:center;
+
+}
+
+.social-btn:hover{
+
+  background:#8b5e3c;
+
+  color:white;
+
+  box-shadow:0 0 20px #8b5e3c;
+
+  transform:translateY(-3px);
+
 }
 
 /* MOBILE ONLY ADDITION */
@@ -539,7 +579,24 @@ h2{
   .about-image img{
     width:180px;
     height:180px;
+    animation:floatImage 6s ease-in-out infinite;
   }
+
+  @keyframes floatImage{
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
+}
 
   .btn{
     width:100%;
@@ -686,6 +743,8 @@ h2{
   </ul>
 </div>
 
+</section> 
+
 <section id="resume">
 <h2>Resume</h2>
 <div class="med-divider"></div>
@@ -738,8 +797,16 @@ h2{
 <div class="med-divider"></div>
 
 <div class="social-links">
-  <a href="#" class="social-btn">Facebook</a>
-  <a href="#" class="social-btn">Instagram</a>
+  <a href="https://www.facebook.com/alicetaire.briones"
+   class="social-btn"
+   target="_blank">
+   Facebook
+</a>
+  <a href="https://www.instagram.com/_whimsylovewitch/"
+   class="social-btn"
+   target="_blank">
+   Instagram
+</a>
 </div>
 </section>
 
