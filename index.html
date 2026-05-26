@@ -737,23 +737,19 @@ header .btn{
   }
 
   .social-links{
-  flex-direction:row;
-  justify-content:center;
-  flex-wrap:nowrap;
-  gap:10px;
-  overflow-x:auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .social-btn{
-  padding:8px 12px;
-  font-size:11px;
-  white-space:nowrap;
-}
-
-.social-btn{
-  padding:8px 12px;
-  font-size:11px;
-  white-space:nowrap;
+  width: 100%;
+  max-width: 260px;
+  font-size: 11px;
+  padding: 8px 12px;
+  white-space: nowrap;
+  text-align: center;
 }
 
 @media (max-width: 480px){
