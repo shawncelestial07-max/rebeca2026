@@ -9,6 +9,15 @@
 
 <style>
 
+  html, body{
+  height:100%;
+  overflow:hidden;
+}
+
+body.portfolio-open{
+  overflow:auto;
+}
+
 /* GLOBAL */
 *{
   margin:0;
@@ -354,17 +363,18 @@ section{
   box-shadow:0 10px 40px rgba(0,0,0,0.05);
 
   opacity:0;
-  transform:translateY(30px);
+  transform:translateY(40px);
 
-  transition:0.8s ease;
+  pointer-events:none;
 
-  display:none; /* IMPORTANT */
+  transition:0.7s ease;
 
 }
 
-section.visible{
+section.active{
   opacity:1;
   transform:translateY(0);
+  pointer-events:auto;
 }
 
 section:hover{
@@ -599,6 +609,20 @@ h2{
 
 }
 
+#portfolioContainer{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+
+  overflow-y:auto;
+
+  padding-top:100px;
+
+  display:none;
+}
+
   .btn{
     width:100%;
     max-width:280px;
@@ -666,8 +690,9 @@ h2{
   <button class="btn" id="showContent">
     View Portfolio
   </button>
-
 </header>
+
+  <div id="portfolioContainer"></div>
 
 <!-- ABOUT -->
 <section id="about">
@@ -838,22 +863,17 @@ const header = document.getElementById('mainHeader');
 
 button.addEventListener('click', ()=>{
 
+  document.body.classList.add('portfolio-open');
+
   header.classList.add('hidden');
 
   sections.forEach((sec,i)=>{
 
-    sec.style.display = 'block';
+    setTimeout(()=>{
 
-    // FORCE MOBILE RENDER (VERY IMPORTANT)
-    requestAnimationFrame(()=>{
+      sec.classList.add('active');
 
-      setTimeout(()=>{
-
-        sec.classList.add('visible');
-
-      }, i * 200);
-
-    });
+    }, i * 200);
 
   });
 
