@@ -6,6 +6,7 @@
 <title>Rebecca S. Briones | Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
@@ -66,6 +67,16 @@ body{
     background-position:0% 50%;
   }
 
+}
+
+.social-btn .icon{
+  margin-right:6px;
+  font-size:14px;
+}
+
+.social-btn i{
+  margin-right:8px;
+  font-size:14px;
 }
 
 .email-btn{
@@ -410,6 +421,12 @@ section.active{
   pointer-events:auto;
 }
 
+section{
+  opacity:0;
+  transform:translateY(40px);
+  pointer-events:none;
+}
+
 section:hover{
   border-color:rgba(196,154,108,0.35);
   box-shadow:0 0 40px rgba(196,154,108,0.08);
@@ -611,6 +628,32 @@ h2{
 
 }
 
+/* === EXPERIENCE FOCUS MODE === */
+
+/* blur everything when active */
+body.exp-focus section:not(#experience) {
+  filter: blur(4px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* blur other cards inside experience */
+body.exp-focus #experience .card:not(.active-card) {
+  filter: blur(4px);
+  opacity: 0.3;
+  transform: scale(0.98);
+}
+
+/* focused card */
+#experience .card.active-card {
+  transform: scale(1.08);
+  z-index: 20;
+  position: relative;
+
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
 /* MOBILE ONLY ADDITION */
 @media (max-width: 768px){
 
@@ -673,6 +716,7 @@ header .btn{
   margin-top:10px;
 }
 
+
 #portfolioContainer{
   position:fixed;
   top:0;
@@ -693,15 +737,23 @@ header .btn{
   }
 
   .social-links{
-    flex-direction:column;
-    align-items:center;
-  }
+  flex-direction:row;
+  justify-content:center;
+  flex-wrap:nowrap;
+  gap:10px;
+  overflow-x:auto;
+}
 
-  .social-btn{
-    width:100%;
-    max-width:220px;
-    text-align:center;
-  }
+.social-btn{
+  padding:8px 12px;
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.social-btn{
+  padding:8px 12px;
+  font-size:11px;
+  white-space:nowrap;
 }
 
 @media (max-width: 480px){
@@ -844,7 +896,6 @@ header .btn{
     Download Resume (PDF)
   </a>
 </div>
-</section>
 
 </section>
 
@@ -883,26 +934,31 @@ header .btn{
 </section>
 
 <section id="socials">
+
 <h2>Connect with Me</h2>
 <div class="med-divider"></div>
 
 <div class="social-links">
+
   <a href="https://www.facebook.com/alicetaire.briones"
-   class="social-btn"
-   target="_blank">
-   Facebook
-</a>
+     class="social-btn"
+     target="_blank">
+     <i class="fa-brands fa-facebook-f"></i> Facebook
+  </a>
+
+  <a href="mailto:rebeccabriones13@gmail.com"
+     class="social-btn">
+     <i class="fa-solid fa-envelope"></i> Email Me
+  </a>
+
   <a href="https://www.instagram.com/_whimsylovewitch/"
-   class="social-btn"
-   target="_blank">
-   Instagram
-</a>
-<a href="mailto:rebeccabriones13@gmail.com"
-   class="social-btn">
-   Email Me
-</a>
+     class="social-btn"
+     target="_blank">
+     <i class="fa-brands fa-instagram"></i> Instagram
+  </a>
 
 </div>
+
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
@@ -923,6 +979,10 @@ window.addEventListener('load', ()=>{
 
   },6000);
 
+});
+
+document.getElementById("showContent").addEventListener("click", () => {
+  document.getElementById("about").scrollIntoView({ behavior: "smooth" });
 });
 
 document.querySelectorAll('section').forEach(sec => {
@@ -970,6 +1030,30 @@ function animateSkills(){
     bar.style.width = bar.dataset.width;
   });
 }
+
+const experienceCards = document.querySelectorAll("#experience .card");
+
+// click card → focus mode
+experienceCards.forEach(card => {
+  card.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    // remove previous focus
+    experienceCards.forEach(c => c.classList.remove("active-card"));
+
+    // set new focus
+    card.classList.add("active-card");
+
+    // enable blur mode
+    document.body.classList.add("exp-focus");
+  });
+});
+
+// click outside → reset
+document.addEventListener("click", () => {
+  document.body.classList.remove("exp-focus");
+  experienceCards.forEach(c => c.classList.remove("active-card"));
+});
 
 </script>
 
