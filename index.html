@@ -305,7 +305,10 @@ header{
 }
 
 header.hidden{
-  display:none;
+  opacity:0;
+  pointer-events:none;
+  visibility:hidden;
+  position:absolute;
 }
 
 header h1{
@@ -976,7 +979,12 @@ window.addEventListener('load', ()=>{
 });
 
 document.getElementById("showContent").addEventListener("click", () => {
-  document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
 });
 
 document.querySelectorAll('section').forEach(sec => {
