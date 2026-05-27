@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Flappy Game</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:'Inter',sans-serif;
+  background: linear-gradient(135deg,#f8f4ef,#e9dccf);
+}
+
+/* GAME WRAPPER */
+.game-wrap{
+  position:relative;
+  width:100vw;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* CANVAS */
+canvas{
+  background: linear-gradient(to top,#f3e7db,#fffaf6);
+  border:2px solid #8b5e3c;
+  border-radius:16px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.15);
+}
+
+/* UI */
+.ui{
+  position:absolute;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  color:#8b5e3c;
+}
+
+.title{
+  font-family:'Orbitron',sans-serif;
+  font-size:18px;
+  letter-spacing:2px;
+}
+
+.score{
+  font-size:16px;
+  margin-top:5px;
+}
+
+/* START SCREEN */
+.overlay{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+}
+
+.btn{
+  padding:10px 18px;
+  border:1px solid #8b5e3c;
+  background:transparent;
+  color:#8b5e3c;
+  font-family:'Orbitron',sans-serif;
+  cursor:pointer;
+  border-radius:8px;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#8b5e3c;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="game-wrap">
+
+  <div class="ui">
+    <div class="title">PORTFOLIO FLAPPY</div>
+    <div class="score" id="score">Score: 0</div>
+  </div>
+
+  <canvas id="game" width="400" height="600"></canvas>
+
+  <div class="overlay" id="overlay">
+    <h2 style="color:#8b5e3c;font-family:Orbitron;">Click / Tap to Start</h2>
+    <button class="btn" onclick="startGame()">Start</button>
+  </div>
+
+</div>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+let gravity = 0.5;
+let lift = -8;
+let velocity = 0;
+let birdY = 250;
+
+let pipes = [];
+let frame = 0;
+let score = 0;
+let gameRunning = false;
+
+/* BIRD */
+function drawBird(){
+  ctx.beginPath();
+  ctx.fillStyle = "#8b5e3c";
+  ctx.arc(80, birdY, 12, 0, Math.PI * 2);
+  ctx.fill();
+
+  // tiny wing
+  ctx.beginPath();
+  ctx.fillStyle = "#c49a6c";
+  ctx.arc(75, birdY-3, 5, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+/* PIPES */
+function drawPipes(){
+  pipes.forEach(pipe => {
+    ctx.fillStyle = "#b08968";
+
+    // top
+    ctx.fillRect(pipe.x, 0, 50, pipe.top);
+
+    // bottom
+    ctx.fillRect(pipe.x, pipe.bottom, 50, canvas.height);
+
+    pipe.x -= 2;
+  });
+
+  pipes = pipes.filter(p => p.x > -60);
+}
+
+/* COLLISION */
+function checkCollision(pipe){
+  if(
+    80 + 12 > pipe.x &&
+    80 - 12 < pipe.x + 50 &&
+    (birdY - 12 < pipe.top || birdY + 12 > pipe.bottom)
+  ){
+    resetGame();
+  }
+}
+
+/* UPDATE */
+function update(){
+  if(!gameRunning) return;
+
+  velocity += gravity;
+  birdY += velocity;
+
+  if(birdY > canvas.height || birdY < 0){
+    resetGame();
+  }
+
+  if(frame % 100 === 0){
+    let gap = 150;
+    let top = Math.random() * 300 + 50;
+
+    pipes.push({
+      x: canvas.width,
+      top: top,
+      bottom: top + gap,
+      passed:false
+    });
+  }
+
+  pipes.forEach(pipe => {
+    checkCollision(pipe);
+
+    if(pipe.x + 50 < 80 && !pipe.passed){
+      score++;
+      pipe.passed = true;
+      document.getElementById("score").innerText = "Score: " + score;
+    }
+  });
+
+  frame++;
+}
+
+/* DRAW */
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  drawBird();
+  drawPipes();
+}
+
+/* LOOP */
+function loop(){
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+loop();
+
+/* CONTROLS */
+function flap(){
+  velocity = lift;
+}
+
+document.addEventListener("keydown", flap);
+document.addEventListener("click", flap);
+document.addEventListener("touchstart", flap);
+
+/* START */
+function startGame(){
+  gameRunning = true;
+  document.getElementById("overlay").style.display = "none";
+}
+
+/* RESET */
+function resetGame(){
+  birdY = 250;
+  velocity = 0;
+  pipes = [];
+  score = 0;
+  frame = 0;
+  gameRunning = false;
+
+  document.getElementById("score").innerText = "Score: 0";
+  document.getElementById("overlay").style.display = "flex";
+}
+</script>
+
+</body>
+</html>
