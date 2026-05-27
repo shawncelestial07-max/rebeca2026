@@ -279,76 +279,73 @@ body{
   }
 }
 
-/* FLOATING ORBS */
-.bg-orb{
-  position:fixed;
-  border-radius:50%;
-  filter:blur(80px);
-  z-index:-2;
-  opacity:0.35;
-  animation:floatOrb 18s ease-in-out infinite;
+/* =========================
+   FLOATING PARTICLES
+========================= */
+
+#particle-field{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0; /* IMPORTANT: was -2 */
 }
 
-/* ORB 1 */
-.orb1{
-  width:320px;
-  height:320px;
+.particle{
+  position: absolute;
+  bottom: -10px;
 
-  background:#c49a6c;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
 
-  top:10%;
-  left:5%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1),
+    rgba(196, 154, 108, 0.8),
+    rgba(196, 154, 108, 0.2),
+    transparent 70%
+  );
+
+  opacity: 0.95;
+  filter: blur(0.2px);
+
+  animation: floatUp linear forwards;
 }
 
-/* ORB 2 */
-.orb2{
-  width:260px;
-  height:260px;
+.particle.glow{
+  width: 10px;
+  height: 10px;
 
-  background:#d8b08c;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1),
+    rgba(255, 220, 180, 0.9),
+    rgba(196, 154, 108, 0.3),
+    transparent 70%
+  );
 
-  bottom:10%;
-  right:5%;
-
-  animation-delay:4s;
+  opacity: 0.75;
+  filter: blur(0.8px);
 }
 
-/* ORB 3 */
-.orb3{
-  width:220px;
-  height:220px;
-
-  background:#8b5e3c;
-
-  top:50%;
-  left:50%;
-
-  animation-delay:8s;
-}
-
-@keyframes floatOrb{
-
+@keyframes floatUp{
   0%{
-    transform:translate(0,0) scale(1);
+    transform: translateY(0);
+    opacity: 0;
   }
-
-  25%{
-    transform:translate(30px,-40px) scale(1.05);
+  10%{
+    opacity: 0.7;
   }
-
-  50%{
-    transform:translate(-20px,20px) scale(0.95);
-  }
-
-  75%{
-    transform:translate(40px,30px) scale(1.02);
-  }
-
   100%{
-    transform:translate(0,0) scale(1);
+    transform: translateY(-110vh) translateX(40px);
+    opacity: 0;
   }
-
 }
+
 
 .resume-container{
   display:flex;
@@ -879,9 +876,7 @@ body.exp-focus #experience .card:not(.active-card) {
   </p>
 </div>
 
-<div class="bg-orb orb1"></div>
-<div class="bg-orb orb2"></div>
-<div class="bg-orb orb3"></div>
+<div id="particle-field"></div>
 
 <header id="mainHeader">
 
@@ -1164,6 +1159,32 @@ document.addEventListener("click", () => {
   document.body.classList.remove("exp-focus");
   experienceCards.forEach(c => c.classList.remove("active-card"));
 });
+
+const field = document.getElementById("particle-field");
+
+function createParticle(){
+  const p = document.createElement("div");
+
+  const isGlow = Math.random() > 0.8;
+  p.className = isGlow ? "particle glow" : "particle";
+
+  const size = Math.random() * 4 + 3;
+  p.style.width = size + "px";
+  p.style.height = size + "px";
+
+  p.style.left = Math.random() * 100 + "vw";
+
+  const duration = 6 + Math.random() * 6;
+  p.style.animationDuration = duration + "s";
+
+  field.appendChild(p);
+
+  setTimeout(() => {
+    p.remove();
+  }, duration * 1000);
+}
+
+setInterval(createParticle, 120);
 
 </script>
 
