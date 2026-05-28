@@ -432,6 +432,81 @@ header p{
   color:#a0704d;
 }
 
+#internships .card span{
+  display:block;
+  margin:8px 0 12px;
+  color:#9b7b60;
+  font-size:13px;
+}
+
+#internships ul{
+  padding-left:18px;
+  line-height:1.7;
+}
+
+#internships li{
+  margin-bottom:6px;
+}
+
+/* EXPERIENCE SECTION CLEAN SPACING */
+
+#experience .card{
+  padding:28px;
+  margin-bottom:24px;
+}
+
+#experience .card h3{
+  font-size:1.05rem;
+  margin-bottom:8px;
+  line-height:1.5;
+  color:#5c4033;
+}
+
+#experience .card span{
+  display:block;
+  margin-bottom:14px;
+
+  font-size:13px;
+  letter-spacing:0.5px;
+
+  color:#9b7b60;
+}
+
+#experience .card ul{
+  padding-left:20px;
+  margin-top:10px;
+}
+
+#experience .card ul li{
+  margin-bottom:10px;
+  line-height:1.7;
+
+  color:#4e3a2b;
+}
+
+/* cleaner hover */
+#experience .card:hover{
+  transform:translateY(-6px);
+}
+
+/* mobile optimization */
+@media(max-width:768px){
+
+  #experience .card{
+    padding:20px;
+  }
+
+  #experience .card h3{
+    font-size:0.98rem;
+  }
+
+  #experience .card ul li{
+    font-size:14px;
+    line-height:1.6;
+  }
+
+}
+
 /* BUTTON */
 .btn{
   padding:10px 22px;
@@ -910,6 +985,19 @@ body.exp-focus #experience .card:not(.active-card) {
 </div>
 </section>
 
+<!-- PERSONAL INFORMATION BUTTON -->
+<section id="personal-btn-section">
+
+  <div class="resume-container">
+
+    <a href="personal-info.html" class="resume-btn">
+      Personal Information
+    </a>
+
+  </div>
+
+</section>
+
 <!-- EXPERIENCE -->
 <section id="experience">
 <h2>Experience</h2>
@@ -979,6 +1067,57 @@ body.exp-focus #experience .card:not(.active-card) {
 
 </section>
 
+<!-- INTERNSHIPS & VOLUNTEER -->
+<section id="internships">
+
+<h2>Internships & Leadership</h2>
+<div class="med-divider"></div>
+
+<div class="card">
+  <h3>Education Rotation – Student Intern</h3>
+  <span>Negros Occidental High School | Jan 2026 – Mar 2026</span>
+
+  <ul>
+    <li>Conducted teaching demonstrations for HUMSS students.</li>
+    <li>Handled grade encoding and classroom facilitation.</li>
+    <li>Assisted in test administration and sub-teaching activities.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Clinical Rotation – Student Intern</h3>
+  <span>Negros Occidental High School | Oct 2025 – Dec 2025</span>
+
+  <ul>
+    <li>Managed student assessments and evaluation analysis.</li>
+    <li>Handled online and face-to-face client interviews.</li>
+    <li>Performed data encoding and testing support.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Industrial Rotation – Student Intern</h3>
+  <span>White Coat Psychological Clinic | Aug 2023 – Oct 2023</span>
+
+  <ul>
+    <li>Assisted in sourcing, interviews, and applicant screening.</li>
+    <li>Managed applicant records and online applications.</li>
+    <li>Analyzed surveys and maintained accurate data encoding.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Volunteer & Leadership Experience</h3>
+
+  <ul>
+    <li>Empowerment Committee Member — Psychological Society</li>
+    <li>Sports Committee Undersecretary — Riverside Student Government</li>
+    <li>Volunteer — Peer Facilitator Association</li>
+  </ul>
+</div>
+
+</section>
+
 <!-- GAME BUTTON -->
 <section id="game-section">
 
@@ -996,8 +1135,6 @@ body.exp-focus #experience .card:not(.active-card) {
   </div>
 
 </section>
-
-<section id="skills">
 
 <section id="skills">
 <h2>Skills</h2>
@@ -1065,19 +1202,27 @@ body.exp-focus #experience .card:not(.active-card) {
 
 <script>
 // intro loading screen
-window.addEventListener('load', ()=>{
+window.addEventListener('load', () => {
 
-  const loadingScreen =
-    document.getElementById('loadingScreen');
+  const loadingScreen = document.getElementById('loadingScreen');
 
-  setTimeout(()=>{
-    loadingScreen.style.opacity='0';
+  // ✅ SKIP INTRO IF ALREADY VIEWED PORTFOLIO
+  if (sessionStorage.getItem("portfolioOpened")) {
+    loadingScreen.style.display = "none";
+    document.body.classList.add("portfolio-open");
+    header.classList.add("hidden");
+    document.querySelectorAll("section").forEach(sec => sec.classList.add("active"));
+    return;
+  }
 
-    setTimeout(()=>{
-      loadingScreen.style.display='none';
-    },1000);
+  setTimeout(() => {
+    loadingScreen.style.opacity = '0';
 
-  },6000);
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 1000);
+
+  }, 6000);
 
 });
 
@@ -1111,14 +1256,14 @@ const header = document.getElementById('mainHeader');
 
 button.addEventListener('click', ()=>{
 
+  sessionStorage.setItem("portfolioOpened", "true");
+
   document.body.classList.add('portfolio-open');
 
   header.classList.add('hidden');
 
   sections.forEach((sec,i)=>{
-
     setTimeout(()=>{
-
       sec.classList.add('active');
 
     }, i * 200);
