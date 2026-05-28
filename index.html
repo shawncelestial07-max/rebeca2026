@@ -815,7 +815,7 @@ body.exp-focus section:hover {
   pointer-events: auto;
 }
 
-/* Experience + Internships cards */
+/* Experience + Internships cards + Personal Information cards */
 body.exp-focus #experience .card:not(.active-card),
 body.exp-focus #internships .card:not(.active-card) {
   filter: blur(4px);
@@ -825,7 +825,8 @@ body.exp-focus #internships .card:not(.active-card) {
 
 /* focused card */
 #experience .card.active-card,
-#internships .card.active-card  {
+#internships .card.active-card
+#personal .card.active-card  {
   transform: scale(1.08);
   z-index: 20;
   position: relative;
