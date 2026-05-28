@@ -1213,20 +1213,32 @@ body.exp-focus #internships .card:not(.active-card) {
 
 <script>
 // intro loading screen
+
 window.addEventListener('load', () => {
 
   const loadingScreen = document.getElementById('loadingScreen');
 
-  // ✅ SKIP INTRO IF ALREADY VIEWED PORTFOLIO
+  // SKIP INTRO IF ALREADY OPENED
   if (sessionStorage.getItem("portfolioOpened")) {
+
     loadingScreen.style.display = "none";
+
     document.body.classList.add("portfolio-open");
+
     header.classList.add("hidden");
-    document.querySelectorAll("section").forEach(sec => sec.classList.add("active"));
+
+    document.querySelectorAll("section").forEach(sec => {
+      sec.classList.add("active");
+    });
+
+    // FIX SKILLS
+    animateSkills();
+
     return;
   }
 
   setTimeout(() => {
+
     loadingScreen.style.opacity = '0';
 
     setTimeout(() => {
@@ -1236,6 +1248,7 @@ window.addEventListener('load', () => {
   }, 6000);
 
 });
+
 
 document.getElementById("showContent").addEventListener("click", () => {
 
@@ -1286,11 +1299,23 @@ button.addEventListener('click', ()=>{
 });
 
 // skills animation
+
 function animateSkills(){
-  document.querySelectorAll('.skill-fill').forEach(bar=>{
-    bar.style.width = bar.dataset.width;
+
+  document.querySelectorAll('.skill-fill').forEach(bar => {
+
+    // reset first
+    bar.style.width = "0";
+
+    // animate again
+    setTimeout(() => {
+      bar.style.width = bar.dataset.width;
+    }, 100);
+
   });
+
 }
+
 
 const experienceCards = document.querySelectorAll("#experience .card");
 const internshipCards = document.querySelectorAll("#internships .card");
