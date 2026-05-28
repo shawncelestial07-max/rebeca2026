@@ -450,37 +450,39 @@ header p{
 
 /* EXPERIENCE SECTION CLEAN SPACING */
 
-#experience .card{
+#experience .card,
+#internships .card{
   padding:28px;
   margin-bottom:24px;
 }
 
-#experience .card h3{
+#experience .card h3,
+#internships .card h3{
   font-size:1.05rem;
   margin-bottom:8px;
   line-height:1.5;
   color:#5c4033;
 }
 
-#experience .card span{
+#experience .card span,
+#internships .card span{
   display:block;
   margin-bottom:14px;
-
   font-size:13px;
   letter-spacing:0.5px;
-
   color:#9b7b60;
 }
 
-#experience .card ul{
+#experience .card ul,
+#internships .card ul{
   padding-left:20px;
   margin-top:10px;
 }
 
-#experience .card ul li{
+#experience .card ul li,
+#internships .card ul li{
   margin-bottom:10px;
   line-height:1.7;
-
   color:#4e3a2b;
 }
 
@@ -800,21 +802,30 @@ h2{
 /* === EXPERIENCE FOCUS MODE === */
 
 /* blur everything when active */
-body.exp-focus section:not(#experience) {
+body.exp-focus section {
   filter: blur(4px);
   opacity: 0.4;
   pointer-events: none;
 }
 
-/* blur other cards inside experience */
-body.exp-focus #experience .card:not(.active-card) {
+body.exp-focus section.active,
+body.exp-focus section:hover {
+  filter: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Experience + Internships cards */
+body.exp-focus #experience .card:not(.active-card),
+body.exp-focus #internships .card:not(.active-card) {
   filter: blur(4px);
   opacity: 0.3;
   transform: scale(0.98);
 }
 
 /* focused card */
-#experience .card.active-card {
+#experience .card.active-card,
+#internships .card.active-card  {
   transform: scale(1.08);
   z-index: 20;
   position: relative;
@@ -1282,6 +1293,7 @@ function animateSkills(){
 }
 
 const experienceCards = document.querySelectorAll("#experience .card");
+const internshipCards = document.querySelectorAll("#internships .card");
 
 // click card → focus mode
 experienceCards.forEach(card => {
@@ -1295,6 +1307,18 @@ experienceCards.forEach(card => {
     card.classList.add("active-card");
 
     // enable blur mode
+    document.body.classList.add("exp-focus");
+  });
+});
+
+internshipCards.forEach(card => {
+  card.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    internshipCards.forEach(c => c.classList.remove("active-card"));
+
+    card.classList.add("active-card");
+
     document.body.classList.add("exp-focus");
   });
 });
